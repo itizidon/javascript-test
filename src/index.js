@@ -1,8 +1,31 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import axios from 'axios'
+import Chart from './component/Chart'
 
-const Index = () => {
-  return <div>Hello React!</div>;
-};
+class Banks extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      data: []
+    }
+  }
 
-ReactDOM.render(<Index />, document.getElementById("index"));
+  componentDidMount() {
+    const promise = axios.get(
+      'https://raw.githubusercontent.com/StrategicFS/Recruitment/master/data.json'
+    )
+    promise.then(dataFromFile => {
+      this.setState(()=>({
+        data: dataFromFile.data
+      }))
+    })
+  }
+  render() {
+    return <div>Hello React!
+      <Chart props={this.state}/>
+      </div>
+  }
+}
+
+ReactDOM.render(<Banks />, document.getElementById('index'))
