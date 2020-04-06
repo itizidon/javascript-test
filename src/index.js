@@ -70,11 +70,12 @@ class Banks extends React.Component {
 
   addHandler(event) {
     event.preventDefault()
+    let newBalance = Number(event.target.balance.value)
     let newData = {
       firstName: event.target.firstName.value,
       lastName: event.target.lastName.value,
       creditorName: event.target.creditorName.value,
-      balance: event.target.balance.value,
+      balance: newBalance,
       minPaymentPercentage: event.target.minPaymentPercentage.value,
       checkbox: false
     }
@@ -137,7 +138,6 @@ class Banks extends React.Component {
     })
   }
   render() {
-    console.log(this.state)
     return (
       <div>
         <Paper>
